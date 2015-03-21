@@ -3,9 +3,9 @@
   %h1
     Jokes
 
-
 :javascript
-  app.controller("MainCtrl", function ($scope, $resource) {
+  angular.module("MyApp", ["ngResource"])
+    .controller("MainCtrl", function ($scope, $resource) {
     var Joke = $resource("http://api.icndb.com/jokes/random/:count");
     $scope.count = 20;
     $scope.get = function (count){
