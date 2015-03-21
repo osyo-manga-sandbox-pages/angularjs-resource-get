@@ -1,0 +1,28 @@
+-# http://jsfiddle.net/subuta/mSnM6/
+#header
+  %h1
+    Jokes
+
+
+:javascript
+  app.controller("MainCtrl", function ($scope, $resource) {
+    var Joke = $resource("http://api.icndb.com/jokes/random/:count");
+    $scope.count = 20;
+    $scope.get = function (count){
+      $scope.jokes = Joke.get({ count: count });
+    };
+    $scope.get(20);
+  });
+
+
+%div{"ng-controller" => "MainCtrl"}
+  %form{ novalidate: "" }
+    .input-group.input-group
+      %span.input-group-btn
+        %button.btn.btn-info{ "ng-click" => "get(count)" } Joke count
+      %input#input_text.form-control{:type => "text", "ng-model" => "count"}
+  %p{ "ng-hide" => "jokes['value']" }
+    読み込み中
+  .joke{ "ng-repeat" => "joke in jokes['value']" }
+    {{ joke["joke"] }}
+

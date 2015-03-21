@@ -1,0 +1,19 @@
+%html{ "ng-app" => "MyApp" }
+  %head
+    %title
+      = data.page.title
+    %script{:src => 'https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js'}
+    %script{:src => 'https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-resource.min.js'}
+
+    %link{:href => "http://netdna.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css", :rel => "stylesheet"}/
+
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}/
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+    %script{:language => "javascript"}
+      var app = angular.module("MyApp", ["ngResource"]);
+  %body
+    .container
+      = yield
+
+
