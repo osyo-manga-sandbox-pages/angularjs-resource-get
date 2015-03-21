@@ -1,0 +1,51 @@
+<html ng-app='MyApp'>
+  <head>
+    <title>
+      
+    </title>
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-resource.min.js'></script>
+    <link href='http://netdna.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css' rel='stylesheet'>
+    <meta charset='utf-8'>
+    <meta content='IE=edge' http-equiv='X-UA-Compatible'>
+    <meta content='width=device-width, initial-scale=1' name='viewport'>
+    <script language='javascript'>
+      var app = angular.module("MyApp", ["ngResource"]);
+    </script>
+  </head>
+  <body>
+    <div class='container'>
+      <div id='header'>
+        <h1>
+          Jokes
+        </h1>
+      </div>
+      <script>
+        app.controller("MainCtrl", function ($scope, $resource) {
+          var Joke = $resource("http://api.icndb.com/jokes/random/:count");
+          $scope.count = 20;
+          $scope.get = function (count){
+            $scope.jokes = Joke.get({ count: count });
+          };
+          $scope.get(20);
+        });
+      </script>
+      <div ng-controller='MainCtrl'>
+        <form novalidate=''>
+          <div class='input-group input-group'>
+            <span class='input-group-btn'>
+              <button class='btn btn-info' ng-click='get(count)'>Joke count</button>
+            </span>
+            <input class='form-control' id='input_text' ng-model='count' type='text'>
+          </div>
+        </form>
+        <p ng-hide="jokes['value']">
+          読み込み中
+        </p>
+        <div class='joke' ng-repeat="joke in jokes['value']">
+          {{ joke["joke"] }}
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
