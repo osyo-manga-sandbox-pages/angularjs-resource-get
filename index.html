@@ -1,17 +1,11 @@
 <html ng-app='MyApp'>
   <head>
-    <title>
-      
-    </title>
     <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js'></script>
     <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-resource.min.js'></script>
     <link href='http://netdna.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css' rel='stylesheet'>
     <meta charset='utf-8'>
     <meta content='IE=edge' http-equiv='X-UA-Compatible'>
     <meta content='width=device-width, initial-scale=1' name='viewport'>
-    <script language='javascript'>
-      var app = angular.module("MyApp", ["ngResource"]);
-    </script>
   </head>
   <body>
     <div class='container'>
@@ -21,7 +15,8 @@
         </h1>
       </div>
       <script>
-        app.controller("MainCtrl", function ($scope, $resource) {
+        angular.module("MyApp", ["ngResource"])
+          .controller("MainCtrl", function ($scope, $resource) {
           var Joke = $resource("http://api.icndb.com/jokes/random/:count");
           $scope.count = 20;
           $scope.get = function (count){
